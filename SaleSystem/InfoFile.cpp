@@ -80,3 +80,26 @@ void CInfoFile::WirteDocline() {
 	}
 	ofs.close();
 }
+
+//添加新商品
+//name:商品名称，num：库存，price：价格
+void CInfoFile::Addline(CString name, int num, int price)
+{
+	msg tmp;
+
+	if (ls.size() > 0)
+	{
+		//商品名称，库存，价格有效
+		if (!name.IsEmpty() && num > 0 && price > 0)
+		{
+			tmp.id = ls.size() + 1;	//id自动加1
+			CStringA str;
+			str = name;	//CString转CStirngA
+			tmp.name = str.GetBuffer(); //CStirngA转char *，商品名称
+			tmp.num = num;	//库存
+			tmp.price = price;	//价格
+
+			ls.push_back(tmp);	//放在链表的后面
+		}
+	}
+}
